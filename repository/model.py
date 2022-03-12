@@ -9,16 +9,15 @@ class IpV4(Base):
     id = Column(Integer, primary_key=True)
     ip = Column(String(15), nullable=False, unique=True)
     provider = Column(String(120), nullable=False)
-    service_type = Column(String(120), nullable=True)
     created_at = Column(DateTime, nullable=False)
 
-    def __init__(self, ip, provider, service_type):
+    def __init__(self, ip, provider):
         self.ip = ip
         self.provider = provider
         self.created_at = datetime.datetime.now()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'IpV4({self.ip}, {self.provider})'
 
-    def __str__(self):
+    def __str__(self) -> Column:
         return self.ip

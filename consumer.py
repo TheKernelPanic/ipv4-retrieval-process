@@ -1,6 +1,8 @@
 import json
 from configuration import parameters
 from messages.rabbitmq import RabbitMQHandler
+from repository.model import IpV4
+from repository.session import session
 
 rabbitmq_handler = RabbitMQHandler(
     host=parameters['rabbitmq']['host'],
@@ -19,7 +21,12 @@ def on_message_callable(channel, method_frame, header_frame, body) -> None:
     :return:
     """
     payload = json.loads(body)
-    print(payload)
+    ip_v4 = IpV4(
+        ip=payload['ip_v4'],
+        provider=payload['provider']
+    )
+    session.add(ip_v4)
+    session.commit()
 
 
 rabbitmq_handler.consume(
