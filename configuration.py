@@ -15,5 +15,8 @@ parameters = {
         'host': os.getenv('RABBITMQ_HOST'),
         'username': os.getenv('RABBITMQ_USERNAME'),
         'password': os.getenv('RABBITMQ_PASSWORD')
+    },
+    'logging': {
+        'directory': os.getenv('LOG_DIRECTORY')
     }
 }
